@@ -14,6 +14,6 @@ export default {
   components: { singleHeader, singleFooter },
   data() {
     return {}
-  }
+  },
 }
 </script>

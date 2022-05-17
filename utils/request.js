@@ -3,24 +3,24 @@ import axios from 'axios'
 
 const service = axios.create({
   baseURL: process.env.BASE_URL,
-  timeout: 5000
+  timeout: 5000,
 })
 
 service.interceptors.request.use(
-  config => {
+  (config) => {
     if (config.isAuth) {
       // config.headers['Authorization'] = "Bearer " + getToken();
     }
     return config
   },
-  error => {
+  (error) => {
     console.log(error) // for debug
     return Promise.reject(error)
   }
 )
 
 service.interceptors.response.use(
-  response => {
+  (response) => {
     const res = response.data
 
     if (res.code !== '00000') {
@@ -29,7 +29,7 @@ service.interceptors.response.use(
       return res
     }
   },
-  error => {
+  (error) => {
     return Promise.reject(error)
   }
 )
