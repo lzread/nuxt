@@ -3,6 +3,10 @@ const envConfig = require('dotenv').config({
 })
 
 export default {
+  server: {
+    port: 3000,
+    host: '0.0.0.0',
+  },
   ssr: 'universal',
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
