@@ -1,34 +1,39 @@
 <template>
   <section>
-    <button @click="lang">lang:{{ locale }}</button>
+    
     <p>{{ $t('home.introduction') }}</p>
     <ul>
       <li v-for="item in items" :key="item.id">
         {{ item.title }}
       </li>
     </ul>
+    <pre>
+      {{
+        items1
+      }}
+    </pre>
   </section>
 </template>
 
 <script>
 
-import { mapGetters } from 'vuex'
-
-import { articleinfoList } from '@/api/news'
-
 export default {
   name: 'IndexPage',
   layout: 'norm',
-  async asyncData() {
-    const { data } = await articleinfoList({
+  async asyncData({ $axios }) {
+    const { data } = await $axios.get('api-product/articleinfo/articleinfoList', {
       pageNum: 0,
       pageSize: 50,
     })
-    return { items: data.list }
+
+    return {
+      items: data.list,
+    }
   },
   data() {
     return {
       items: [],
+      items1: [],
     }
   },
   head() {
@@ -36,13 +41,10 @@ export default {
       title: this.$t('home.title'),
     }
   },
-  computed: {
-    ...mapGetters(['locale']),
+  created() {
+    this.init()
   },
-  created() {},
-  fetch({ store, params }) {
-    
-  },
+  fetch({ store, params }) {},
   methods: {
     lang() {
       if (this.locale == 'en') {
@@ -52,6 +54,14 @@ export default {
         this.$i18n.locale = 'en'
         this.$store.commit('SET_LANG', 'en')
       }
+    },
+    async init() {
+      const { data } = await this.$axios.get('api-product/articleinfo/articleinfoList', {
+        pageNum: 0,
+        pageSize: 50,
+      })
+
+      this.items1 = data.list
     },
   },
 }

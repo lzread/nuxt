@@ -1,9 +1,16 @@
 export default function ({ isHMR, app, store, route, params, error, redirect }) {
-  const defaultLocale = app.i18n.fallbackLocale
+  if(process.server){
+    console.log('process.server:true')
+  }else{
+    console.log('process.server:false')
+  }
+  console.log(app.$cookies.get('lang'))
+  const defaultLocale = app.$cookies.get('lang') || app.i18n.fallbackLocale
   if (isHMR) {
     return
   }
-  const locale = app.$cookies.get('lang') || defaultLocale
+  const locale = defaultLocale
+  
   if (!store.state.locales.includes(locale)) {
     return error({ message: 'This page could not be found.', statusCode: 404 })
   }

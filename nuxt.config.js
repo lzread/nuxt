@@ -3,6 +3,7 @@ const envConfig = require('dotenv').config({
 })
 
 export default {
+  ssr: 'universal',
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -28,9 +29,9 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  router: {
-    middleware: ['i18n'],
-  },
+  // router: {
+  //   middleware: ['i18n'],
+  // },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/global.less'],
@@ -40,7 +41,7 @@ export default {
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/i18n.js'],
+  plugins: ['~/plugins/i18n.js', '~/plugins/axios.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -49,10 +50,12 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [['cookie-universal-nuxt', { parseJSON: false }]],
+  modules: [['cookie-universal-nuxt', { parseJSON: false }], '@nuxtjs/axios'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    
+  build: {},
+
+  axios: {
+    baseURL: process.env.BASE_URL,
   },
 }

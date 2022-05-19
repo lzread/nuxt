@@ -2,7 +2,7 @@ import Vuex from 'vuex'
 
 export const state = () => ({
   locales: ['en', 'zh'],
-  locale: 'en',
+  locale:  'en',
 })
 
 export const getters = {
@@ -20,7 +20,9 @@ export const mutations = {
 }
 
 export const actions = {
-  nuxtServerInit() {},
+  nuxtServerInit({ commit }) {
+    // commit('SET_LANG', this.$cookies.get('lang') )
+  },
 }
 
 new Vuex.Store({
