@@ -29,9 +29,9 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  // router: {
-  //   middleware: ['i18n'],
-  // },
+  router: {
+    middleware: ['i18n'],
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/global.less'],

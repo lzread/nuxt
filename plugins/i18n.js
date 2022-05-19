@@ -3,13 +3,11 @@ import VueI18n from 'vue-i18n'
 
 Vue.use(VueI18n)
 
-
-
 export default ({ app, store }) => {
-  store.commit('SET_LANG', app.$cookies.get('lang') || 'en')
+  //store.commit('SET_LANG', app.$cookies.get('lang') || 'en')
   app.i18n = new VueI18n({
-    locale: app.$cookies.get('lang'),
-    fallbackLocale: app.$cookies.get('lang'),
+    locale: store.state.locale,
+    fallbackLocale: store.state.locale,
     messages: {
       en: require('~/locales/en.json'),
       zh: require('~/locales/zh.json'),
