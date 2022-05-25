@@ -7,9 +7,8 @@ export default {
     port: 3000,
     host: '0.0.0.0',
   },
-  ssr: 'universal',
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  target: 'server',
 
   loading: false,
 

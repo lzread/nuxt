@@ -4,7 +4,7 @@
     <p>{{ $t('home.introduction') }}</p>
     <ul>
       <li v-for="item in items" :key="item.id">
-        {{ item.title }}
+        <nuxt-link :to="'/' + item.id">{{ item.title }}</nuxt-link>
       </li>
     </ul>
     <pre>
@@ -21,10 +21,7 @@ export default {
   name: 'IndexPage',
   layout: 'norm',
   async asyncData({ $axios }) {
-    const { data } = await $axios.get('api-product/articleinfo/articleinfoList', {
-      pageNum: 0,
-      pageSize: 50,
-    })
+    const { data } = await $axios.get(`api-product/articleinfo/articleinfoList?pageNum=0&pageSize=50`)
 
     return {
       items: data.list,
